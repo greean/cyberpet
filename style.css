@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans&family=Pangolin&family=Permanent+Marker&display=swap');
+/*  font-family: 'Balsamiq Sans', cursive;
+    font-family: 'Pangolin', cursive;
+    font-family: 'Permanent Marker', cursive;*/
+
+body {
+    background-image: url(img/gremlins_bg.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: #24234b;
+    font-family: 'Pangolin', cursive;
+}
+
+h1 {
+    font-family: 'Permanent Marker', cursive;
+    color: crimson;
+    font-size: 300%;
+    text-align: center;
+}
