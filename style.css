@@ -11,9 +11,73 @@ body {
     font-family: 'Pangolin', cursive;
 }
 
-h1 {
+h1, h2 {
     font-family: 'Permanent Marker', cursive;
     color: crimson;
     font-size: 300%;
     text-align: center;
+}
+
+h2 {
+    color: midnightblue;
+    font-size: 200%;
+}
+
+p {
+    font-size: 120%;
+}
+
+.wrapper {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flexbox;
+    /* padding: 0px; */
+}
+
+.instructions, .game {
+    background-color: rgba(189, 183, 107, 0.8);
+    background-blend-mode: lighten;
+    border: 2px solid #ddd;
+    border-radius: 20px ;
+    padding: 10px 30px;
+    text-align: center;
+}
+
+#play {
+    background-color: palegreen;
+    border: 2px solid #111;
+    border-radius: 20px;
+    padding: 10px;
+    min-width: 200px;
+    margin: 20px;
+}
+
+.game {
+    display: none; 
+}
+
+.game_container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.gizmo img {
+    border: 2px solid #111;
+    border-radius: 20px;
+}
+
+.stats {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    background-color: paleturquoise;
+    padding: 8px;
+    border: 2px solid #111;
+    border-radius: 14px;
+    margin: 10px 0px 40px;
+}
+
+button {
+    font-size: 130%;
 }

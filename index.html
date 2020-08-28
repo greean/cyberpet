@@ -7,6 +7,44 @@
 </head>
 <body>
     <h1>Cyber-pet: Gizmo</h1>
+    <div class="wrapper">
+        <div class="instructions" id="instructions">
+            <h2>How to play</h2>
+            <p>
+                You have been given 'Gizmo', a small furry creature known as a Mogwai, to look after as a pet.</p>
+            <p>
+                Mogwai's are not easy to look after, but if you can increase Gizmo's health and happyness you will prove yourself as a great Mogwai carer.
+            </p>
+            <p>
+                However, if you are not up to the task and Gizmo's health or happyness falls too low, the shopkeeper will come and take him back.
+            </p>
+            <p>Choose from the options available in order to care for Gizmo.</p>
+            <p>Good Luck!</p>
+            <button id="play">Play</button>
+        </div>
+        <div class="game" id="game">
+            <h2>This is the game</h2>
+            <div class="game_container">
+                <div class="gizmo" id="gizmo">
+                    <img src="img/happy.png" height="360px" id="image" />
+                    <div class="stats" id="stats">
+
+                        <span>Health:</span>
+                        <span id="health">5</span>
+                        <span>Happiness:</span>
+                        <span id="happiness">5</span>
+                    </div>
+                </div>
+                <div class="choices" id="choices">
+                    <button class="options" id="option1">Music</button>
+                    <button class="options" id="option2">Read</button>
+                    <button class="options" id="option3">Drink</button>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
     <script src="app.js"></script>
 </body>
 </html>
