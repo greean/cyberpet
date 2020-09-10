@@ -3,13 +3,17 @@ const instructions = document.getElementById("instructions");
 const game = document.getElementById("game");
 const endscreen = document.getElementById("endscreen");
 
-const play = document.getElementById("play");
+const start = document.getElementById("start");
+const newgame = document.getElementById("newgame");
 const image = document.getElementById("image");
 const health_block = document.getElementById("health_block");
 const health = document.getElementById("health");
 const happiness = document.getElementById("happiness");
 const option1 = document.getElementById("option1");
+const option2 = document.getElementById("option2");
+const option3 = document.getElementById("option3");
 
+// Object
 const creature = {
     name: "Gizmo",
     typeOfPet: "Mogwai",
@@ -45,13 +49,18 @@ const creature = {
         this.happiness --;
         image.src = `img/spill_drink.png`;
     },
+    reset() {
+        this.health = 5;
+        this.happiness = 5;
+    }
 }
 
 // main content
-play.addEventListener("click", () => {
+start.addEventListener("click", () => {
     game.style.display = "block";
     instructions.style.display = "none";
-})
+    // endscreen.style.display = "none";
+});
 
 const gameover = () => {
     endscreen.style.display = "block";
@@ -84,44 +93,63 @@ const updateStats = () => {
     happiness.textContent = creature.happiness;
     checkHealth();
     checkHappiness();
+    
 }
 
-// Options Button SCSS styling
-// $(function() {  
-//     $('.options')
-//       .on('mouseenter', function(e) {
-//               var parentOffset = $(this).offset(),
-//                 relX = e.pageX - parentOffset.left,
-//                 relY = e.pageY - parentOffset.top;
-//               $(this).find('span').css({top:relY, left:relX})
-//       })
-//       .on('mouseout', function(e) {
-//               var parentOffset = $(this).offset(),
-//                 relX = e.pageX - parentOffset.left,
-//                 relY = e.pageY - parentOffset.top;
-//           $(this).find('span').css({top:relY, left:relX})
-//       });
-//     $('[href=#]').click(function(){return false});
-//   });
+
+
+// list of all actions
+const allActions = ['mirror', 'read', 'music', 'sleep', 'eat', 'drink'];
+
+// create new list from above and randomly remove items until only 3 options left
+let finalActions = allActions;
+
+const removeActions = () => {
+    while (finalActions.length > 3){
+        let randNum = Math.floor((Math.random() * finalActions.length));
+        finalActions.splice(randNum, 1);
+    }
+};
+removeActions();
+
+// set text of buttons to above actions
+const setOptions = () => {
+    option1.textContent = finalActions[0];
+    option2.textContent = finalActions[1];
+    option3.textContent = finalActions[2];
+};
+setOptions();
+
+
+
+// randAction1 = actions[2];
+
 
 
 // Options
 option1.addEventListener("click", () => {
-    creature.music();
+    creature.music(); // needs to correspond with finalActions[0]
     updateStats();
 });
 
 option2.addEventListener("click", () => {
-    creature.read();
+    creature.read(); // needs to correspond with finalActions[1]
     updateStats();
-});
+}); 
 
 option3.addEventListener("click", () => {
-    creature.drink();
+    creature.drink(); // needs to correspond with finalActions[2]
+    updateStats();
+});
+
+newgame.addEventListener("click", () => {
+    //reset();
+    game.style.display = "block";
+    // instructions.style.display = "none";
+    endscreen.style.display = "none";
+    creature.reset();
     updateStats();
 });
 
 
-// console.log(typeof(creature));
-// creature.mirror();
-// console.log(creature.health, creature.happiness);
+// Options Button styling
