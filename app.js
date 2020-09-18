@@ -55,6 +55,9 @@ const creature = {
     }
 }
 
+
+
+
 // main content
 start.addEventListener("click", () => {
     game.style.display = "block";
@@ -67,6 +70,7 @@ const gameover = () => {
     game.style.display = "none";
 }
 
+// changes background of health stats if score gets low, also checks if you lose
 const checkHealth = () => {
     if((creature.health <= 1)||(creature.happiness <= 1)){
         gameover();
@@ -78,6 +82,7 @@ const checkHealth = () => {
         health_block.style.backgroundColor = `paleturquoise`;
     }
 }
+// changes background of happiness stats if score gets low
 const checkHappiness = () => {
     if(creature.happiness < 3){
         happiness_block.style.backgroundColor = `red`;
@@ -86,43 +91,63 @@ const checkHappiness = () => {
     }else{
         happiness_block.style.backgroundColor = `paleturquoise`;
     }
+};
+
+
+// list of all actions
+const resetActions = () => {
+    let allActions = ['Mirror', 'Read', 'Music', 'Sleep', 'Eat', 'Drink'];
+    return allActions;
 }
+// console.log(resetActions());
+
+// create new list from above and randomly remove items until only 3 options left
+const setActions = (array) => {
+    let finalActions = array;
+    console.log(finalActions);
+    console.log(finalActions.length);
+    while (finalActions.length > 3){
+        let randNum = Math.floor((Math.random() * finalActions.length));
+        finalActions.splice(randNum, 1);
+    };
+    return finalActions;
+};
+// setActions(resetActions());
+// console.log(setActions());
+
+
+
+// set text of buttons to above actions
+const setButtons = (options) => {
+    // console.log(options[0], options[1], options[2]);
+    // console.log(allActions);
+
+    option1.textContent = options[0];
+    option2.textContent = options[1];
+    option3.textContent = options[2];
+
+    // option1.textContent = setActions[0];
+    // option2.textContent = setActions[1];
+    // option3.textContent = setActions[2];
+};
+setButtons(setActions(resetActions()));
+
+// reset the finalActions in order to generate new options
+// const resetActions = () => {
+//     console.log(`resetActions has been called.`);
+//     finalActions = allActions;
+//     console.log(finalActions);
+//     setButtons(setActions());
+// }
 
 const updateStats = () => {
     health.textContent = creature.health;
     happiness.textContent = creature.happiness;
+    // resetActions();
     checkHealth();
     checkHappiness();
-    
-}
-
-
-
-// list of all actions
-const allActions = ['mirror', 'read', 'music', 'sleep', 'eat', 'drink'];
-
-// create new list from above and randomly remove items until only 3 options left
-let finalActions = allActions;
-
-const removeActions = () => {
-    while (finalActions.length > 3){
-        let randNum = Math.floor((Math.random() * finalActions.length));
-        finalActions.splice(randNum, 1);
-    }
+    setButtons(setActions(resetActions()));
 };
-removeActions();
-
-// set text of buttons to above actions
-const setOptions = () => {
-    option1.textContent = finalActions[0];
-    option2.textContent = finalActions[1];
-    option3.textContent = finalActions[2];
-};
-setOptions();
-
-
-
-// randAction1 = actions[2];
 
 
 
@@ -135,6 +160,7 @@ option1.addEventListener("click", () => {
 option2.addEventListener("click", () => {
     creature.read(); // needs to correspond with finalActions[1]
     updateStats();
+
 }); 
 
 option3.addEventListener("click", () => {
@@ -142,14 +168,10 @@ option3.addEventListener("click", () => {
     updateStats();
 });
 
+// reset the game to have another go
 newgame.addEventListener("click", () => {
-    //reset();
     game.style.display = "block";
-    // instructions.style.display = "none";
     endscreen.style.display = "none";
     creature.reset();
     updateStats();
 });
-
-
-// Options Button styling
