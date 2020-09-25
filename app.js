@@ -28,22 +28,20 @@ const creature = {
     },
     read() {
         this.happiness ++;
-        // image reading
         image.src = `img/reading.png`;
     },
     music() {
-        this.health ++;
-        // keyboard image
+        this.happiness ++;
         image.src = `img/music.png`;
     },
     sleep() {
         this.health ++;
-        this.happiness ++;
-        // sleep image
+        image.src = `img/sleeping.png`;
     },
     eat() {
         this.health ++;
         this.happiness ++;
+        image.src = `img/eating.png`;
     },
     drink() {
         this.health --;
@@ -56,8 +54,6 @@ const creature = {
         image.src = `img/happy.png`;
     }
 }
-
-
 
 
 // change from intro screen to game
@@ -231,19 +227,17 @@ const selectedOption = () => {
     }
 };
 
-// Options
+// 'options' event listeners
 option1.addEventListener("click", () => {
     selected = option1.textContent;
     selectedOption();
     updateStats();
 });
-
 option2.addEventListener("click", () => {
     selected = option2.textContent;
     selectedOption();
     updateStats();
 }); 
-
 option3.addEventListener("click", () => {
     selected = option3.textContent;
     selectedOption();
