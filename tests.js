@@ -19,6 +19,35 @@
 // ******************************************************
 
 
+// SHUFFLE THE LIST OF ACTIONS SO OPTIONS WILL APPEAR MORE RANDOM
+
+// const shuffle = (array) => {
+//     let currentIndex = array.length, temporaryValue, randomIndex;
+  
+//     // While there remain elements to shuffle...
+//     while (0 !== currentIndex) {
+  
+//       // Pick a remaining element...
+//       randomIndex = Math.floor(Math.random() * currentIndex);
+//       currentIndex -= 1;
+  
+//       // And swap it with the current element.
+//       temporaryValue = array[currentIndex];
+//       array[currentIndex] = array[randomIndex];
+//       array[randomIndex] = temporaryValue;
+//     }
+  
+//     return array;
+//   }
+  
+//   // Used like so
+//   let allActions = ['mirror', 'read', 'music', 'sleep', 'eat', 'drink'];
+//   shuffle(allActions);
+//   console.log(allActions);
+
+// ******************************************************
+
+
 // UPDATING CREATURES STATS
 
 // const creature = {
@@ -37,31 +66,45 @@
 // updateStats(6,8);
 // console.log(creature.health, creature.happiness);
 
-
 // ******************************************************
 
-// SHUFFLE THE LIST OF ACTIONS SO OPTIONS WILL APPEAR MORE RANDOM
 
-const shuffle = (array) => {
-    let currentIndex = array.length, temporaryValue, randomIndex;
-  
-    // While there remain elements to shuffle...
-    while (0 !== currentIndex) {
-  
-      // Pick a remaining element...
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex -= 1;
-  
-      // And swap it with the current element.
-      temporaryValue = array[currentIndex];
-      array[currentIndex] = array[randomIndex];
-      array[randomIndex] = temporaryValue;
+// CREATING ACTIONS LINKED TO OPTIONS
+const creature = {
+    name: "Gizmo",
+    health: 5,
+    happiness: 5,
+    // functions
+    run() {
+        this.health ++;
+    },
+    hug() {
+        this.happiness ++;
+    },
+    fall() {
+        this.health --;
+        this.happiness --;
     }
-  
-    return array;
-  }
-  
-  // Used like so
-  let allActions = ['mirror', 'read', 'music', 'sleep', 'eat', 'drink'];
-  shuffle(allActions);
-  console.log(allActions);
+};
+console.log(`Health: ${creature.health}, Happiness: ${creature.happiness}`);
+
+const options = [ 'Run', 'Hug', 'Fall' ];
+
+let selected = options[2];
+console.log(selected);
+
+const checkOption = () => {
+    if(selected === 'Run'){
+        creature.run();
+    }else if(selected === 'Hug'){
+        creature.hug();
+    }else if(selected === 'Fall'){
+        creature.fall();
+    }else{
+        console.log(`No valid option was selected!`)
+    }
+};
+
+checkOption();
+
+console.log(`Health: ${creature.health}, Happiness: ${creature.happiness}`);

@@ -5,7 +5,6 @@ const endscreen = document.getElementById("endscreen");
 const start = document.getElementById("start");
 const newgame = document.getElementById("newgame");
 const image = document.getElementById("image");
-// const health_block = document.getElementById("health_block");
 const health = document.getElementById("health");
 const happiness = document.getElementById("happiness");
 const option1 = document.getElementById("option1");
@@ -15,7 +14,7 @@ const outcome = document.getElementById("outcome");
 const end_image = document.getElementById("end_image");
 const final_comment = document.getElementById("final_comment");
 
-// Object
+// creature object
 const creature = {
     name: "Gizmo",
     typeOfPet: "Mogwai",
@@ -61,22 +60,24 @@ const creature = {
 
 
 
-// main content
+// change from intro screen to game
 start.addEventListener("click", () => {
     game.style.display = "block";
     instructions.style.display = "none";
-    // endscreen.style.display = "none";
 });
 
+// change to end screen and set the win/lose content
 const gameover = (result) => {
     if (result === `win`) {
         end_image.src = `img/win.gif`;
         outcome.textContent = `Well Done!`;
         final_comment.textContent = `You've made Gizmo a very happy Mogwai`;
+        newgame.textContent = `Play again!`;
     }else {
         end_image.src = `img/grandfather.png`;
         outcome.textContent = `"With Mogwai comes much responsibility!"`;
         final_comment.textContent = `"Perhaps one day, you will be ready. Until then, Mogwai will be waiting."`;
+        newgame.textContent = `Try again!`;
     }
     endscreen.style.display = "block";
     game.style.display = "none";
@@ -140,13 +141,13 @@ const checkHappiness = () => {
 // };
 
 
-// creates a list of all the possible actions
-
+// create a list of all the possible actions
 const resetActions = () => {
     let allActions = ['Mirror', 'Read', 'Music', 'Sleep', 'Eat', 'Drink'];
     return allActions;
 }
 
+// shuffle the actions so appear more random e.g. when it appears, mirror won't always be the top option
 const shuffle = (array) => {
     let currentIndex = array.length, temporaryValue, randomIndex;
   
@@ -166,11 +167,10 @@ const shuffle = (array) => {
     return array;
   }
 
-// create new list from above and randomly remove items until only 3 options left
+// create new list from above and randomly remove items until only 3 options are left
 const setActions = (array) => {
     let finalActions = array;
-    // console.log(finalActions);
-    // console.log(finalActions.length);
+
     while (finalActions.length > 3){
         let randNum = Math.floor((Math.random() * finalActions.length));
         finalActions.splice(randNum, 1);
@@ -180,19 +180,12 @@ const setActions = (array) => {
 
 // set text of buttons to above actions
 const setButtons = (options) => {
-    // console.log(options[0], options[1], options[2]);
-    // console.log(allActions);
-
     option1.textContent = options[0];
     option2.textContent = options[1];
     option3.textContent = options[2];
-
-    // option1.textContent = setActions[0];
-    // option2.textContent = setActions[1];
-    // option3.textContent = setActions[2];
 };
 
-// Initial set-up
+// initial set-up so the buttons are ready
 setButtons(
     setActions(
         shuffle(
@@ -201,14 +194,13 @@ setButtons(
     )
 ); 
 
-
+// update the stats, check health/happiness and refresh the button options
 const updateStats = () => {
     health.textContent = creature.health;
     happiness.textContent = creature.happiness;
     checkHealth();
     checkHappiness();
 
-    // Re-adjust the options
     setButtons(
         setActions(
             shuffle(
@@ -218,21 +210,43 @@ const updateStats = () => {
     );  
 };
 
+let selected = null;
 
+// run the action associated with the button
+const selectedOption = () => {
+    if(selected === 'Mirror'){
+        creature.mirror();
+    }else if(selected === 'Read'){
+        creature.read();
+    }else if(selected === 'Music'){
+        creature.music();
+    }else if(selected === 'Sleep'){
+        creature.sleep();
+    }else if(selected === 'Eat'){
+        creature.eat();
+    }else if(selected === 'Drink'){
+        creature.drink();
+    }else{
+        console.log(`No valid option was selected!`)
+    }
+};
 
 // Options
 option1.addEventListener("click", () => {
-    creature.music(); // needs to correspond with finalActions[0]
+    selected = option1.textContent;
+    selectedOption();
     updateStats();
 });
 
 option2.addEventListener("click", () => {
-    creature.read(); // needs to correspond with finalActions[1]
+    selected = option2.textContent;
+    selectedOption();
     updateStats();
 }); 
 
 option3.addEventListener("click", () => {
-    creature.mirror(); // needs to correspond with finalActions[2]
+    selected = option3.textContent;
+    selectedOption();
     updateStats();
 });
 
