@@ -140,12 +140,31 @@ const checkHappiness = () => {
 // };
 
 
-// list of all actions
+// creates a list of all the possible actions
+
 const resetActions = () => {
     let allActions = ['Mirror', 'Read', 'Music', 'Sleep', 'Eat', 'Drink'];
     return allActions;
 }
-// console.log(resetActions());
+
+const shuffle = (array) => {
+    let currentIndex = array.length, temporaryValue, randomIndex;
+  
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+  
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+  
+      // And swap it with the current element.
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+  
+    return array;
+  }
 
 // create new list from above and randomly remove items until only 3 options left
 const setActions = (array) => {
@@ -158,10 +177,6 @@ const setActions = (array) => {
     };
     return finalActions;
 };
-// setActions(resetActions());
-// console.log(setActions());
-
-
 
 // set text of buttons to above actions
 const setButtons = (options) => {
@@ -176,23 +191,31 @@ const setButtons = (options) => {
     // option2.textContent = setActions[1];
     // option3.textContent = setActions[2];
 };
-setButtons(setActions(resetActions()));
 
-// reset the finalActions in order to generate new options
-// const resetActions = () => {
-//     console.log(`resetActions has been called.`);
-//     finalActions = allActions;
-//     console.log(finalActions);
-//     setButtons(setActions());
-// }
+// Initial set-up
+setButtons(
+    setActions(
+        shuffle(
+            resetActions()
+        )
+    )
+); 
+
 
 const updateStats = () => {
     health.textContent = creature.health;
     happiness.textContent = creature.happiness;
-    // resetActions();
     checkHealth();
     checkHappiness();
-    setButtons(setActions(resetActions()));
+
+    // Re-adjust the options
+    setButtons(
+        setActions(
+            shuffle(
+                resetActions()
+            )
+        )
+    );  
 };
 
 
@@ -206,7 +229,6 @@ option1.addEventListener("click", () => {
 option2.addEventListener("click", () => {
     creature.read(); // needs to correspond with finalActions[1]
     updateStats();
-
 }); 
 
 option3.addEventListener("click", () => {
