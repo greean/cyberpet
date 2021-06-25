@@ -21,29 +21,31 @@
 
 // SHUFFLE THE LIST OF ACTIONS SO OPTIONS WILL APPEAR MORE RANDOM
 
-// const shuffle = (array) => {
-//     let currentIndex = array.length, temporaryValue, randomIndex;
+const shuffle = (array) => {
+    let currentIndex = array.length, temporaryValue, randomIndex;
+    
   
-//     // While there remain elements to shuffle...
-//     while (0 !== currentIndex) {
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
   
-//       // Pick a remaining element...
-//       randomIndex = Math.floor(Math.random() * currentIndex);
-//       currentIndex -= 1;
+    //   // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+        console.log(`CS = ${currentIndex}, TV = ${temporaryValue}, RI = ${randomIndex}`);
   
-//       // And swap it with the current element.
-//       temporaryValue = array[currentIndex];
-//       array[currentIndex] = array[randomIndex];
-//       array[randomIndex] = temporaryValue;
-//     }
+    //   // And swap it with the current element.
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];  
+        array[randomIndex] = temporaryValue;
+    }
   
-//     return array;
-//   }
+    return array;
+  }
   
-//   // Used like so
-//   let allActions = ['mirror', 'read', 'music', 'sleep', 'eat', 'drink'];
-//   shuffle(allActions);
-//   console.log(allActions);
+  // Used like so
+  let allActions = ['mirror', 'read', 'music', 'sleep', 'eat', 'drink'];
+  shuffle(allActions);
+  console.log(allActions);
 
 // ******************************************************
 
@@ -70,41 +72,44 @@
 
 
 // CREATING ACTIONS LINKED TO OPTIONS
-const creature = {
-    name: "Gizmo",
-    health: 5,
-    happiness: 5,
-    // functions
-    run() {
-        this.health ++;
-    },
-    hug() {
-        this.happiness ++;
-    },
-    fall() {
-        this.health --;
-        this.happiness --;
-    }
-};
-console.log(`Health: ${creature.health}, Happiness: ${creature.happiness}`);
+// const creature = {
+//     name: "Gizmo",
+//     health: 5,
+//     happiness: 5,
+//     // functions
+//     run() {
+//         this.health ++;
+//     },
+//     hug() {
+//         this.happiness ++;
+//     },
+//     fall() {
+//         this.health --;
+//         this.happiness --;
+//     }
+// };
+// console.log(`Health: ${creature.health}, Happiness: ${creature.happiness}`);
 
-const options = [ 'Run', 'Hug', 'Fall' ];
+// const options = [ 'Run', 'Hug', 'Fall' ];
 
-let selected = options[2];
-console.log(selected);
+// let selected = options[2];
+// console.log(selected);
 
-const checkOption = () => {
-    if(selected === 'Run'){
-        creature.run();
-    }else if(selected === 'Hug'){
-        creature.hug();
-    }else if(selected === 'Fall'){
-        creature.fall();
-    }else{
-        console.log(`No valid option was selected!`)
-    }
-};
+// const checkOption = () => {
+//     if(selected === 'Run'){
+//         creature.run();
+//     }else if(selected === 'Hug'){
+//         creature.hug();
+//     }else if(selected === 'Fall'){
+//         creature.fall();
+//     }else{
+//         console.log(`No valid option was selected!`)
+//     }
+// };
 
-checkOption();
+// checkOption();
 
-console.log(`Health: ${creature.health}, Happiness: ${creature.happiness}`);
+// console.log(`Health: ${creature.health}, Happiness: ${creature.happiness}`);
+
+
+// ******************************************************

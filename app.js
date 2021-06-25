@@ -82,10 +82,12 @@ const gameover = (result) => {
 // changes background of health stats if score gets low, also checks if you win or lose
 const checkHealth = () => {
     switch (true) {
+        // lose when score reaches 1
         case creature.health < 2 || creature.happiness < 2:
             gameover (`lose`);
             break;
-        case creature.health >14 || creature.happiness >14:
+        // win when score reaches 12
+        case creature.health >11 || creature.happiness >11:
             gameover('win');
             break;
         case creature.health < 3:
@@ -139,27 +141,29 @@ const checkHappiness = () => {
 
 // create a list of all the possible actions
 const resetActions = () => {
-    let allActions = ['Mirror', 'Read', 'Music', 'Sleep', 'Eat', 'Drink'];
+    let allActions = ['Look in the mirror', 'Read a book', 'Play some music', 'Go to sleep', 'Eat something', 'Have a drink'];
     return allActions;
 }
 
-// shuffle the actions so appear more random e.g. when it appears, mirror won't always be the top option
+// shuffle the order of the actions to appear more random e.g. mirror won't always be the top option
+// The functions 'currentIndex' looks at the value at the end of the array and stores it as 'tempValue'. 
+// Sets the arrays end value 'currentIndex' to the value at 'randomIndex', and the value at 'randomIndex' to the stored 'tempValue'
+// 'currentIndex' moves to look at the previous value in the array.
+// The process is repeated until the 'currentIndex' reaches 0.
 const shuffle = (array) => {
-    let currentIndex = array.length, temporaryValue, randomIndex;
-  
-    // While there remain elements to shuffle...
+    let currentIndex = array.length, tempValue, randomIndex;  // sets 'currentIndex' to the length of the array, initially 'tempValue' and 'randomIndex' are undefined
+    // While there remain values to shuffle...
     while (0 !== currentIndex) {
   
-      // Pick a remaining element...
-      randomIndex = Math.floor(Math.random() * currentIndex);
+      // Pick a random value...
+      randomIndex = Math.floor(Math.random() * currentIndex);   // set the randomIndex
       currentIndex -= 1;
   
-      // And swap it with the current element.
-      temporaryValue = array[currentIndex];
+      // And swap it with the current value.
+      tempValue = array[currentIndex];     
       array[currentIndex] = array[randomIndex];
-      array[randomIndex] = temporaryValue;
+      array[randomIndex] = tempValue;
     }
-  
     return array;
   }
 
@@ -210,17 +214,17 @@ let selected = null;
 
 // run the action associated with the button
 const selectedOption = () => {
-    if(selected === 'Mirror'){
+    if(selected === 'Look in the mirror'){
         creature.mirror();
-    }else if(selected === 'Read'){
+    }else if(selected === 'Read a book'){
         creature.read();
-    }else if(selected === 'Music'){
+    }else if(selected === 'Play some music'){
         creature.music();
-    }else if(selected === 'Sleep'){
+    }else if(selected === 'Go to sleep'){
         creature.sleep();
-    }else if(selected === 'Eat'){
+    }else if(selected === 'Eat something'){
         creature.eat();
-    }else if(selected === 'Drink'){
+    }else if(selected === 'Have a drink'){
         creature.drink();
     }else{
         console.log(`No valid option was selected!`)
